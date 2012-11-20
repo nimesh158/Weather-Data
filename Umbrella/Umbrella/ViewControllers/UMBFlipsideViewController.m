@@ -30,8 +30,8 @@
 @end
 
 @implementation UMBFlipsideViewController
-@synthesize delegate, postalCode, fahrenheitButton, fahrenheitCheckmark, centigradeButton, centigradeCheckmark, showMeWeatherButton;
-@synthesize pcAboveDashedImage, pcBelowDashedImage, tsAboveDashedImage, tsMiddeDashedImage, tsBelowDashedImage, showingWeatherInF;
+@synthesize delegate = _delegate, postalCode = _postalCode, fahrenheitButton = _fahrenheitButton, fahrenheitCheckmark = _fahrenheitCheckmark, centigradeButton = _centigradeButton, centigradeCheckmark = _centigradeCheckmark, showMeWeatherButton = _showMeWeatherButton;
+@synthesize pcAboveDashedImage = _pcAboveDashedImage, pcBelowDashedImage = _pcBelowDashedImage, tsAboveDashedImage = _tsAboveDashedImage, tsMiddeDashedImage = _tsMiddeDashedImage, tsBelowDashedImage = _tsBelowDashedImage, showingWeatherInF = _showingWeatherInF;
 
 - (void)viewDidLoad
 {
@@ -122,8 +122,8 @@
 
 - (IBAction) setUnits:(id)sender {
     UIButton* button = (UIButton *)sender;
-    if(button == fahrenheitButton ||
-       button == fahrenheitCheckmark) {
+    if(button == self.fahrenheitButton ||
+       button == self.fahrenheitCheckmark) {
         self.showingWeatherInF = YES;
         [self.centigradeCheckmark setBackgroundImage:[UIImage imageNamed:@"checkmark_off"] forState:UIControlStateNormal];
         [self.fahrenheitCheckmark setBackgroundImage:[UIImage imageNamed:@"checkmark_on"] forState:UIControlStateNormal];

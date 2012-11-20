@@ -9,6 +9,7 @@
 #import "UMBMainViewController.h"
 #import "WeatherAPIClient.h"
 #import "UMBAppDelegate.h"
+#import "UMBHourlyCell.h"
 
 @interface UMBMainViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UILabel* cityName;
@@ -17,7 +18,8 @@
 @property (strong, nonatomic) IBOutlet UILabel* precipitation;
 @property (strong, nonatomic) IBOutlet UILabel* humidity;
 @property (strong, nonatomic) IBOutlet UILabel* windSpeed;
-@property (strong, nonatomic) IBOutlet UITableView* hourlyData;
+@property (strong, nonatomic) IBOutlet UITableView* hourly;
+@property (strong, nonatomic) NSArray* hourlyData;
 @property (assign, nonatomic) BOOL isWeatherDataLoaded;
 
 - (void) updateViewForWeatherData:(NSDictionary *)weatherData;
@@ -25,7 +27,7 @@
 @end
 
 @implementation UMBMainViewController
-@synthesize cityName, temperature, weatherText, precipitation, humidity, windSpeed, hourlyData, isWeatherDataLoaded;
+@synthesize cityName = _cityName, temperature = _temperature, weatherText = _weatherText, precipitation = _precipitation, humidity = _humidity, windSpeed = _windSpeed, hourly = _hourly, hourlyData = _hourlyData, isWeatherDataLoaded = _isWeatherDataLoaded;
 
 - (void)viewDidLoad
 {
@@ -78,12 +80,17 @@
                                               otherButtonTitles:nil];
         [alert show];
     } else {
+        //set current conditions data
         [self updateCurrentConditionsForData:[weatherData objectForKey:@"current_observation"]];
+        DLog(@"Hourly Conditions = %@", [weatherData objectForKey:@"hourly_forecast"]);
+        //set hourly data
+        self.hourlyData = [weatherData objectForKey:@"hourly_forecast"];
+        [self.hourly reloadData];
     }
 }
 
 - (void) updateCurrentConditionsForData:(NSDictionary *)current {
-    DLog(@"Current Conditions = %@", current);
+//    DLog(@"Current Conditions = %@", current);
     
     //city name
     NSDictionary* display_location = [current objectForKey:@"display_location"];
@@ -96,7 +103,7 @@
         [self.temperature setText:[NSString stringWithFormat:@"%@\u00B0", [current objectForKey:@"temp_c"]]];
     
     //weather text
-    [self.weatherText setText:[current objectForKey:@"weather"]];
+    [self.weatherText setText:[[current objectForKey:@"weather"] uppercaseString]];
     
     //Precipitation
     [self.precipitation setText:[NSString stringWithFormat:@"%@ in", [current objectForKey:@"precip_1hr_in"]]];
@@ -110,12 +117,87 @@
 
 #pragma mark - Table view delegate and data source
 
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    if(!self.isWeatherDataLoaded)
+        return 1;
+    
+    NSDictionary* hour = [self.hourlyData objectAtIndex:0];
+    if([[[hour objectForKey:@"FCTTIME"] objectForKey:@"hour"] intValue] == 0)
+        return 2;
+    
+    return 3;
+}
+
 - (int) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if(self.hourlyData) {
+        NSDictionary* hour = [self.hourlyData objectAtIndex:0];
+        int firstHour = [[[hour objectForKey:@"FCTTIME"] objectForKey:@"hour"] intValue];
+        
+        int todayHours, tomorrowHours, dayAfterTomorrowHours;
+        todayHours = 24 - firstHour;
+        
+        if(todayHours > 12)
+            tomorrowHours = 24 - (todayHours - 12);
+        else
+            tomorrowHours = 24;
+        
+        if((todayHours + tomorrowHours) < 36)
+            dayAfterTomorrowHours = 36 - (todayHours + tomorrowHours);
+        
+        if(section == 0)
+           return todayHours;
+        
+        if(section == 1)
+            return tomorrowHours;
+        
+        if(section == 2)
+            return dayAfterTomorrowHours;
+    }
+    
     return 1;
 }
 
-- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 22;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44;
+}
+
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    UIImageView* imageV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"section_header_background"]];
+    [imageV setFrame:CGRectMake(0, 0, 320, 22)];
+ 
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(14, 0, 320, 22)];
+    [label setFont:[UIFont fontWithName:@"Futura-CondensedMedium" size:17.0f]];
+    [label setTextColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]];
+    [label setBackgroundColor:[UIColor clearColor]];
+    NSDictionary* hour;
+    if(section == 0) {
+        hour = [self.hourlyData objectAtIndex:0];
+        [label setText:[[[hour objectForKey:@"FCTTIME"] objectForKey:@"weekday_name"] uppercaseString]];
+    }
+    
+    if(section == 1) {
+        int row = [tableView numberOfRowsInSection:0];
+        hour = [self.hourlyData objectAtIndex:row];
+        [label setText:[[[hour objectForKey:@"FCTTIME"] objectForKey:@"weekday_name"] uppercaseString]];
+    }
+    
+    if(section == 2) {
+        int row = [tableView numberOfRowsInSection:0] + [tableView numberOfRowsInSection:1];
+        hour = [self.hourlyData objectAtIndex:row];
+        [label setText:[[[hour objectForKey:@"FCTTIME"] objectForKey:@"weekday_name"] uppercaseString]];
+    }
+    
+    [imageV addSubview:label];
+    
+    [imageV setBackgroundColor:[UIColor clearColor]];
+    
+    return imageV;
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -123,7 +205,40 @@
     NSString* loadingCell = @"loadingCell";
     
     if(self.isWeatherDataLoaded) {
+        UMBHourlyCell *cell = [tableView dequeueReusableCellWithIdentifier:hourlyCell];
         
+        if (cell == nil) {
+            cell = [[UMBHourlyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:hourlyCell];
+        }
+        
+        NSDictionary* hour;
+        if(indexPath.section == 0) {
+            hour = [self.hourlyData objectAtIndex:indexPath.row];
+        } else if(indexPath.section == 1) {
+            int row = [tableView numberOfRowsInSection:0] + indexPath.row;
+            hour = [self.hourlyData objectAtIndex:row];
+        } else if(indexPath.section == 2) {
+            int row = [tableView numberOfRowsInSection:0] + [tableView numberOfRowsInSection:1] + indexPath.row;
+            hour = [self.hourlyData objectAtIndex:row];
+        }
+        
+        [cell.weatherText setText:[[hour objectForKey:@"condition"] uppercaseString]];
+        
+        if([[NSUserDefaults standardUserDefaults] boolForKey:defaultTempUnitsIsF])
+            [cell.temperature setText:[NSString stringWithFormat:@"%@\u00B0", [[hour objectForKey:@"temp"] objectForKey:@"english"]]];
+        else
+            [cell.temperature setText:[NSString stringWithFormat:@"%@\u00B0", [[hour objectForKey:@"temp"] objectForKey:@"metric"]]];
+        
+        NSString* civil = [[hour objectForKey:@"FCTTIME"] objectForKey:@"civil"];
+        NSArray* parts = [civil componentsSeparatedByString:@" "];
+        
+        [cell.time setText:[parts objectAtIndex:0]];
+        [cell.meridian setText:[parts objectAtIndex:1]];
+        
+        UIColor* color = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dashed_line_pattern"]];
+        [cell.seperator setBackgroundColor:color];
+        
+        return cell;
     } else {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:loadingCell];
         
@@ -155,6 +270,10 @@
     }
     
     return nil;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - Flipside View

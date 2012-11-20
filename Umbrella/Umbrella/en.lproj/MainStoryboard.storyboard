@@ -104,14 +104,86 @@
                                     <constraint firstAttribute="height" constant="283" id="V7c-N7-Qr1"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="WJa-Ow-J3M">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="hourlyCell" id="WJa-Ow-J3M" customClass="UMBHourlyCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="23b-C2-J6s">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="NFq-1A-0jo"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qav-Kv-MW2">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="31" id="3kg-EG-lXG"/>
+                                                        <constraint firstAttribute="width" constant="34" id="Muv-bG-D3t"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPD-gQ-lVI">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="3Dh-of-cWT"/>
+                                                        <constraint firstAttribute="width" constant="138" id="vPF-c9-nvq"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Futura-CondensedMedium" family="Futura" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMO-vR-SZa">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="63" id="Qa4-MO-h5X"/>
+                                                        <constraint firstAttribute="height" constant="43" id="tr2-ia-bvA"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Futura-CondensedMedium" family="Futura" pointSize="31"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0da-Wq-OTH">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="33" id="FEm-Mi-2rr"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Futura-CondensedMedium" family="Futura" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="deD-n7-vKH">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="8Kb-wg-xAf"/>
+                                                        <constraint firstAttribute="width" constant="15" id="lps-7s-vmZ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Futura-CondensedMedium" family="Futura" pointSize="10"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="23b-C2-J6s" firstAttribute="trailing" secondItem="WJa-Ow-J3M" secondAttribute="trailing" type="default" id="5Iw-pW-AzV"/>
+                                            <constraint firstItem="0da-Wq-OTH" firstAttribute="top" secondItem="WJa-Ow-J3M" secondAttribute="top" type="default" id="A72-3Y-Ohc"/>
+                                            <constraint firstAttribute="trailing" secondItem="bMO-vR-SZa" secondAttribute="trailing" constant="53" id="Ed9-Nv-yj8"/>
+                                            <constraint firstItem="23b-C2-J6s" firstAttribute="bottom" secondItem="WJa-Ow-J3M" secondAttribute="bottom" type="default" id="Jfw-nb-ND8"/>
+                                            <constraint firstItem="0da-Wq-OTH" firstAttribute="leading" secondItem="WJa-Ow-J3M" secondAttribute="leading" constant="266" id="MJR-X5-Qta"/>
+                                            <constraint firstItem="bMO-vR-SZa" firstAttribute="top" secondItem="WJa-Ow-J3M" secondAttribute="top" type="default" id="UN6-Vb-azC"/>
+                                            <constraint firstItem="deD-n7-vKH" firstAttribute="bottom" secondItem="WJa-Ow-J3M" secondAttribute="bottom" type="default" id="Vzr-Al-XNg"/>
+                                            <constraint firstAttribute="trailing" secondItem="deD-n7-vKH" secondAttribute="trailing" constant="7" id="csx-H5-awm"/>
+                                            <constraint firstItem="23b-C2-J6s" firstAttribute="leading" secondItem="WJa-Ow-J3M" secondAttribute="leading" type="default" id="diy-pv-Os4"/>
+                                            <constraint firstItem="KPD-gQ-lVI" firstAttribute="leading" secondItem="WJa-Ow-J3M" secondAttribute="leading" constant="57" id="hjN-AT-bHC"/>
+                                            <constraint firstItem="bMO-vR-SZa" firstAttribute="centerY" secondItem="KPD-gQ-lVI" secondAttribute="centerY" type="default" id="jBb-la-Eid"/>
+                                            <constraint firstItem="KPD-gQ-lVI" firstAttribute="centerY" secondItem="qav-Kv-MW2" secondAttribute="centerY" type="default" id="jij-7p-eAg"/>
+                                            <constraint firstItem="0da-Wq-OTH" firstAttribute="baseline" secondItem="deD-n7-vKH" secondAttribute="baseline" type="default" id="o0j-y9-9bN"/>
+                                            <constraint firstItem="qav-Kv-MW2" firstAttribute="leading" secondItem="WJa-Ow-J3M" secondAttribute="leading" constant="14" id="qW3-et-Rl5"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="icon" destination="qav-Kv-MW2" id="wFG-RT-g8P"/>
+                                            <outlet property="meridian" destination="deD-n7-vKH" id="nFb-xx-2ZT"/>
+                                            <outlet property="seperator" destination="23b-C2-J6s" id="cMb-z4-RUX"/>
+                                            <outlet property="temperature" destination="bMO-vR-SZa" id="dJ8-eR-GmV"/>
+                                            <outlet property="time" destination="0da-Wq-OTH" id="C7x-1g-VyV"/>
+                                            <outlet property="weatherText" destination="KPD-gQ-lVI" id="43g-Dc-kyQ"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -124,31 +196,31 @@
                         <constraints>
                             <constraint firstItem="uwB-0O-5zt" firstAttribute="leading" secondItem="eAG-Md-AWF" secondAttribute="leading" type="default" id="1r6-PL-B2k"/>
                             <constraint firstItem="OwC-3l-jDg" firstAttribute="top" secondItem="eAG-Md-AWF" secondAttribute="top" type="default" id="2Kc-5L-bbS"/>
-                            <constraint firstAttribute="trailing" secondItem="ung-kJ-lGl" secondAttribute="trailing" constant="8" id="2aq-r7-D8Y"/>
                             <constraint firstItem="eXP-Bg-KrW" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="26" id="2kd-TR-Kgf"/>
                             <constraint firstItem="OwC-3l-jDg" firstAttribute="trailing" secondItem="6gA-D8-wCO" secondAttribute="trailing" type="default" id="3XX-LO-08D"/>
                             <constraint firstItem="7x3-0q-UjE" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="47M-2E-Npb"/>
                             <constraint firstItem="6gA-D8-wCO" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="117" id="8rk-50-Psp"/>
                             <constraint firstItem="6gA-D8-wCO" firstAttribute="top" secondItem="Scy-3U-3rn" secondAttribute="top" type="default" id="9DB-f0-JLm"/>
+                            <constraint firstAttribute="trailing" secondItem="CjF-oT-9Gk" secondAttribute="trailing" constant="27" id="Bai-SQ-xKC"/>
                             <constraint firstItem="CjF-oT-9Gk" firstAttribute="baseline" secondItem="OwC-3l-jDg" secondAttribute="baseline" type="default" id="Bbn-nG-ENF"/>
                             <constraint firstItem="6gA-D8-wCO" firstAttribute="top" secondItem="uwB-0O-5zt" secondAttribute="top" type="default" id="CtJ-df-Nc3"/>
                             <constraint firstItem="SNc-kp-eLj" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="DUq-d4-gHT"/>
                             <constraint firstItem="eXP-Bg-KrW" firstAttribute="top" secondItem="3" secondAttribute="top" constant="32" id="Fcb-bM-Yvx"/>
+                            <constraint firstAttribute="trailing" secondItem="Scy-3U-3rn" secondAttribute="trailing" constant="28" id="Fwe-WG-vBt"/>
                             <constraint firstItem="10" firstAttribute="top" secondItem="3" secondAttribute="top" constant="34" id="JB7-MA-JZq"/>
                             <constraint firstItem="CjF-oT-9Gk" firstAttribute="top" secondItem="OwC-3l-jDg" secondAttribute="top" type="default" id="K1A-Ry-cyw"/>
                             <constraint firstItem="SNc-kp-eLj" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="LhP-xD-Cdj"/>
                             <constraint firstItem="sSr-6L-iuw" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="PR7-aP-mGi"/>
                             <constraint firstItem="uwB-0O-5zt" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="29" id="S4R-DZ-YxX"/>
                             <constraint firstItem="uwB-0O-5zt" firstAttribute="top" secondItem="3" secondAttribute="top" constant="117" id="Vqb-Q1-Naq"/>
+                            <constraint firstAttribute="trailing" secondItem="ung-kJ-lGl" secondAttribute="trailing" constant="21" id="YPp-Oy-0qY"/>
                             <constraint firstItem="OwC-3l-jDg" firstAttribute="baseline" secondItem="eAG-Md-AWF" secondAttribute="baseline" type="default" id="ZfI-1n-oQ2"/>
                             <constraint firstAttribute="trailing" secondItem="10" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="apl-1S-UOC"/>
-                            <constraint firstAttribute="trailing" secondItem="CjF-oT-9Gk" secondAttribute="trailing" constant="27" id="bmi-2a-TRj"/>
                             <constraint firstItem="eAG-Md-AWF" firstAttribute="top" secondItem="3" secondAttribute="top" constant="141" id="dQ0-Ns-5jD"/>
                             <constraint firstItem="6gA-D8-wCO" firstAttribute="baseline" secondItem="uwB-0O-5zt" secondAttribute="baseline" type="default" id="f2T-t6-2ry"/>
                             <constraint firstItem="Scy-3U-3rn" firstAttribute="baseline" secondItem="6gA-D8-wCO" secondAttribute="baseline" type="default" id="jGg-iP-g5G"/>
                             <constraint firstItem="OwC-3l-jDg" firstAttribute="leading" secondItem="6gA-D8-wCO" secondAttribute="leading" type="default" id="jJq-Iy-gdp"/>
                             <constraint firstItem="ung-kJ-lGl" firstAttribute="top" secondItem="3" secondAttribute="top" constant="65" id="mby-dw-8fR"/>
-                            <constraint firstAttribute="trailing" secondItem="Scy-3U-3rn" secondAttribute="trailing" constant="28" id="o4Z-z7-2om"/>
                             <constraint firstItem="7x3-0q-UjE" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="sFE-Pc-Q3C"/>
                             <constraint firstItem="sSr-6L-iuw" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="uhL-TV-7CF"/>
                             <constraint firstItem="eAG-Md-AWF" firstAttribute="trailing" secondItem="uwB-0O-5zt" secondAttribute="trailing" type="default" id="vlP-rs-slr"/>
@@ -158,7 +230,7 @@
                     </view>
                     <connections>
                         <outlet property="cityName" destination="SNc-kp-eLj" id="BQy-af-4ls"/>
-                        <outlet property="hourlyData" destination="7x3-0q-UjE" id="xif-2J-h8V"/>
+                        <outlet property="hourly" destination="7x3-0q-UjE" id="Lso-r2-43t"/>
                         <outlet property="humidity" destination="OwC-3l-jDg" id="M3k-9j-ffz"/>
                         <outlet property="precipitation" destination="eAG-Md-AWF" id="VNW-YS-AGQ"/>
                         <outlet property="temperature" destination="eXP-Bg-KrW" id="rAh-Fp-FCi"/>
@@ -422,11 +494,22 @@
                 <relationship kind="outlet" name="tsMiddeDashedImage" candidateClass="UIImageView"/>
             </relationships>
         </class>
+        <class className="UMBHourlyCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UMBHourlyCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="icon" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="meridian" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="seperator" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="temperature" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="time" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="weatherText" candidateClass="UILabel"/>
+            </relationships>
+        </class>
         <class className="UMBMainViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UMBMainViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="cityName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="hourlyData" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="hourly" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="humidity" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="precipitation" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="temperature" candidateClass="UILabel"/>

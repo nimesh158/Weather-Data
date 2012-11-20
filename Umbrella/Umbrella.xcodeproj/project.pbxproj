@@ -36,6 +36,7 @@
 		51CF6D82165AE0DB00FCADA8 /* settings_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51CF6D65165AE0DB00FCADA8 /* settings_background@2x.png */; };
 		51CF6D83165AE0DB00FCADA8 /* submit_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 51CF6D66165AE0DB00FCADA8 /* submit_icon.png */; };
 		51CF6D84165AE0DB00FCADA8 /* submit_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51CF6D67165AE0DB00FCADA8 /* submit_icon@2x.png */; };
+		51CF6D87165AE96C00FCADA8 /* UMBHourlyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51CF6D86165AE96C00FCADA8 /* UMBHourlyCell.m */; };
 		585688AD160131D600AD5C9D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 585688AC160131D600AD5C9D /* UIKit.framework */; };
 		585688AF160131D600AD5C9D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 585688AE160131D600AD5C9D /* Foundation.framework */; };
 		585688B1160131D600AD5C9D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 585688B0160131D600AD5C9D /* CoreGraphics.framework */; };
@@ -88,6 +89,8 @@
 		51CF6D65165AE0DB00FCADA8 /* settings_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings_background@2x.png"; sourceTree = "<group>"; };
 		51CF6D66165AE0DB00FCADA8 /* submit_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = submit_icon.png; sourceTree = "<group>"; };
 		51CF6D67165AE0DB00FCADA8 /* submit_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "submit_icon@2x.png"; sourceTree = "<group>"; };
+		51CF6D85165AE96C00FCADA8 /* UMBHourlyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMBHourlyCell.h; sourceTree = "<group>"; };
+		51CF6D86165AE96C00FCADA8 /* UMBHourlyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMBHourlyCell.m; sourceTree = "<group>"; };
 		585688A8160131D600AD5C9D /* Umbrella.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Umbrella.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		585688AC160131D600AD5C9D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		585688AE160131D600AD5C9D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -269,6 +272,8 @@
 				588A8A4F1603C089002350AF /* UMBFlipsideViewController.m */,
 				588A8A501603C089002350AF /* UMBMainViewController.h */,
 				588A8A511603C089002350AF /* UMBMainViewController.m */,
+				51CF6D85165AE96C00FCADA8 /* UMBHourlyCell.h */,
+				51CF6D86165AE96C00FCADA8 /* UMBHourlyCell.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -428,6 +433,7 @@
 				588A8A7B1603C4D8002350AF /* AFURLConnectionOperation.m in Sources */,
 				588A8A7C1603C4D8002350AF /* AFXMLRequestOperation.m in Sources */,
 				588A8A7D1603C4D8002350AF /* UIImageView+AFNetworking.m in Sources */,
+				51CF6D87165AE96C00FCADA8 /* UMBHourlyCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
