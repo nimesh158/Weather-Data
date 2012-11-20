@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+//Strings to save in user preferences
 static NSString* const defaultTempUnitsIsF = @"defaultTemperatureUnitsIsF";
 static NSString* const savedPostalCode = @"savedPostalCode";
 

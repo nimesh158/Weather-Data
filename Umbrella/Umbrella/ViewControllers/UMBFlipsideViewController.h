@@ -18,6 +18,11 @@
 
 @property (weak, nonatomic) id <UMBFlipsideViewControllerDelegate> delegate;
 
+/*!
+ @method showWeather:
+ @abstract Displays the Main View Controller.
+ @param sender the Show Me Weather button
+ */
 - (IBAction)showWeather:(id)sender;
 
 @end

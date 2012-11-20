@@ -13,32 +13,103 @@
 #import "UMBImageDownloader.h"
 
 @interface UMBMainViewController () <UITableViewDataSource, UITableViewDelegate>
+
+/*!
+ @method cityName
+ @abstract Display the name of the city user is viewing.
+ */
 @property (strong, nonatomic) IBOutlet UILabel* cityName;
+
+/*!
+ @method temperature
+ @abstract Display the current temperature (in F or C).
+ */
 @property (strong, nonatomic) IBOutlet UILabel* temperature;
+
+/*!
+ @method weatherText
+ @abstract Display the current weather text.
+ */
 @property (strong, nonatomic) IBOutlet UILabel* weatherText;
+
+/*!
+ @method precipitation
+ @abstract Display the current precipitation (in).
+ */
 @property (strong, nonatomic) IBOutlet UILabel* precipitation;
+
+/*!
+ @method humidity
+ @abstract Display the current humidity (in %).
+ */
 @property (strong, nonatomic) IBOutlet UILabel* humidity;
+
+/*!
+ @method windSpeed
+ @abstract Display the current windSpeed (in MPH).
+ */
 @property (strong, nonatomic) IBOutlet UILabel* windSpeed;
+
+/*!
+ @method hourly
+ @abstract TableView that displays the hourly information.
+ */
 @property (strong, nonatomic) IBOutlet UITableView* hourly;
+
+/*!
+ @method hourlyData
+ @abstract Holds the hourly data.
+ */
 @property (strong, nonatomic) NSArray* hourlyData;
+
+/*!
+ @method icons
+ @abstract Holds all the hourly icons.
+ */
 @property (strong, nonatomic) NSMutableDictionary* icons;
+
+/*!
+ @method isWeatherDataLoaded
+ @abstract Flag to determine if the weather data is loaded.
+ */
 @property (assign, nonatomic) BOOL isWeatherDataLoaded;
 
+/*!
+ @method updateViewForWeatherData:
+ @abstract Updates the current and hourly views with the downloaded weather data.
+ @param weatherData the dictionary of the retrieved weather data
+ */
 - (void) updateViewForWeatherData:(NSDictionary *)weatherData;
+
+/*!
+ @method updateCurrentConditionsForData:
+ @abstract Updates the current conditions with the downloaded weather data.
+ @param current the dictionary of the current weather data
+ */
 - (void) updateCurrentConditionsForData:(NSDictionary *)current;
+
+/*!
+ @method retriveIcon:forIndexPath
+ @abstract Retrives the UIImage for the icon at the indexpath and stores it in the icons dictionary.
+ @param iconLink url link to the icon
+ @param indexPath indexpath of the cell for which the icon is to be downloaded
+ */
 - (void) retriveIcon:(NSString *)iconLink forIndexPath:(NSIndexPath *) indexPath;
 @end
 
 @implementation UMBMainViewController
 @synthesize cityName = _cityName, temperature = _temperature, weatherText = _weatherText, precipitation = _precipitation, humidity = _humidity, windSpeed = _windSpeed, hourly = _hourly, hourlyData = _hourlyData, icons = _icons, isWeatherDataLoaded = _isWeatherDataLoaded;
 
+#pragma mark - View Management
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    //initially the weather data is not downloaded
     self.isWeatherDataLoaded = NO;
     
+    //initialize
     self.icons = [[NSMutableDictionary alloc] init];
     
     //Set the font size between 17-41 and have it adjust automatically
@@ -49,10 +120,11 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    NSString* postalCode = [NSString stringWithFormat:@"16803"];
+    NSString* postalCode;
     
     if(![[NSUserDefaults standardUserDefaults] stringForKey:savedPostalCode]) {
         //If there is no saved postal code, set the default to 16803
+        postalCode = [NSString stringWithFormat:@"16803"];
         [[NSUserDefaults standardUserDefaults] setObject:postalCode forKey:savedPostalCode];
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
@@ -82,12 +154,22 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    self.cityName = nil;
+    self.weatherText = nil;
+    self.precipitation = nil;
+    self.humidity = nil;
+    self.windSpeed = nil;
+    self.hourly = nil;
+    self.hourlyData = nil;
+    self.icons = nil;
 }
 
 #pragma mark - UpdateView for Weather Data
 - (void) updateViewForWeatherData:(NSDictionary *)weatherData {
 //    DLog(@"Weather data = %@", weatherData);
     
+    //if the response is an error that the user did not enter a valid postal code,
+    //display it
     if([[weatherData objectForKey:@"response"] objectForKey:@"error"]) {
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
                                                         message:[[[weatherData objectForKey:@"response"] objectForKey:@"error"] objectForKey:@"description"]

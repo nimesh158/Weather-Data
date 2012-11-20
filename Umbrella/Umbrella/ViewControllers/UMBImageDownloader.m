@@ -14,7 +14,7 @@
 @implementation UMBImageDownloader
 @synthesize data = _data, downloader = _downloader;
 
-- (void) downloadIcon:(NSString *)iconURL withCompletionBlock:(CompletionBlock)compBlock {
+- (void) downloadIcon:(NSString *)iconURL withCompletionBlock:(IconDownloaderCompletionBlock)compBlock {
     self.data = [[NSMutableData alloc] init];
     
     completionBlock = [compBlock copy];
