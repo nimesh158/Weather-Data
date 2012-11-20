@@ -82,7 +82,7 @@
     } else {
         //set current conditions data
         [self updateCurrentConditionsForData:[weatherData objectForKey:@"current_observation"]];
-        DLog(@"Hourly Conditions = %@", [weatherData objectForKey:@"hourly_forecast"]);
+//        DLog(@"Hourly Conditions = %@", [weatherData objectForKey:@"hourly_forecast"]);
         //set hourly data
         self.hourlyData = [weatherData objectForKey:@"hourly_forecast"];
         [self.hourly reloadData];
@@ -90,7 +90,7 @@
 }
 
 - (void) updateCurrentConditionsForData:(NSDictionary *)current {
-//    DLog(@"Current Conditions = %@", current);
+    DLog(@"Current Conditions = %@", current);
     
     //city name
     NSDictionary* display_location = [current objectForKey:@"display_location"];
@@ -98,16 +98,18 @@
     
     //temperature
     if([[NSUserDefaults standardUserDefaults] boolForKey:defaultTempUnitsIsF])
-        [self.temperature setText:[NSString stringWithFormat:@"%@\u00B0", [current objectForKey:@"temp_f"]]];
+        [self.temperature setText:[NSString stringWithFormat:@"%.1f\u00B0", [[current objectForKey:@"temp_f"] floatValue]]];
     else
-        [self.temperature setText:[NSString stringWithFormat:@"%@\u00B0", [current objectForKey:@"temp_c"]]];
+        [self.temperature setText:[NSString stringWithFormat:@"%.1f\u00B0", [[current objectForKey:@"temp_c"] floatValue]]];
     
     //weather text
     [self.weatherText setText:[[current objectForKey:@"weather"] uppercaseString]];
     
     //Precipitation
-    [self.precipitation setText:[NSString stringWithFormat:@"%@ in", [current objectForKey:@"precip_1hr_in"]]];
-    
+    if([[current objectForKey:@"precip_today_in"] isEqualToString:@"-999.00"])
+        [self.precipitation setText:[NSString stringWithFormat:@"%@ in", [current objectForKey:@"precip_1hr_in"]]];
+    else
+        [self.precipitation setText:[NSString stringWithFormat:@"%@ in", [current objectForKey:@"precip_today_in"]]];
     //Humidity
     [self.humidity setText:[current objectForKey:@"relative_humidity"]];
     
