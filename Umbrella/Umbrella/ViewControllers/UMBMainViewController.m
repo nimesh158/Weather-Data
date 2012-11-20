@@ -40,26 +40,33 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //Make weather data call
-    if([[NSUserDefaults standardUserDefaults] stringForKey:savedPostalCode]) {
-        [[WeatherAPIClient sharedClient] setAPIKey:[NSString stringWithFormat:@"944814a88ee4e7fa"]];
-        [[WeatherAPIClient sharedClient] getForcastAndConditionsForZipCode:[[NSUserDefaults standardUserDefaults] stringForKey:savedPostalCode] withCompletionBlock:^(BOOL success, NSDictionary* result, NSError* error) {
-            if(success) {
-                self.isWeatherDataLoaded = YES;
-                [self updateViewForWeatherData:result];
-            } else {
-                self.isWeatherDataLoaded = NO;
-            }
-        }];
+    NSString* postalCode = [NSString stringWithFormat:@"16803"];
+    
+    if(![[NSUserDefaults standardUserDefaults] stringForKey:savedPostalCode]) {
+        //If there is no saved postal code, set the default to 16803
+        [[NSUserDefaults standardUserDefaults] setObject:postalCode forKey:savedPostalCode];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:@"Please enter a postal code in settings"
-                                                       delegate:self
-                                              cancelButtonTitle:@"ok"
-                                              otherButtonTitles:nil];
-        [alert show];
-        self.isWeatherDataLoaded = NO;
+        postalCode = [[NSUserDefaults standardUserDefaults] stringForKey:savedPostalCode];
     }
+    
+    //If there is no deafult value for F or C, set it to F
+    if([[NSUserDefaults standardUserDefaults] objectForKey:defaultTempUnitsIsF] == nil) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:defaultTempUnitsIsF];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    
+    //Make weather data call
+    [[WeatherAPIClient sharedClient] setAPIKey:[NSString stringWithFormat:@"944814a88ee4e7fa"]];
+    [[WeatherAPIClient sharedClient] getForcastAndConditionsForZipCode:postalCode
+                                                   withCompletionBlock:^(BOOL success, NSDictionary* result, NSError* error) {
+                                                       if(success) {
+                                                           self.isWeatherDataLoaded = YES;
+                                                           [self updateViewForWeatherData:result];
+                                                       } else {
+                                                           self.isWeatherDataLoaded = NO;
+                                                       }
+                                                   }];
 }
 
 - (void)didReceiveMemoryWarning

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		51CF6D68165AE0DB00FCADA8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51CF6D49165AE0DB00FCADA8 /* Default-568h@2x.png */; };
 		51CF6D69165AE0DB00FCADA8 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 51CF6D4A165AE0DB00FCADA8 /* Default.png */; };
 		51CF6D6A165AE0DB00FCADA8 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51CF6D4B165AE0DB00FCADA8 /* Default@2x.png */; };
 		51CF6D6B165AE0DB00FCADA8 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 51CF6D4C165AE0DB00FCADA8 /* Icon-72.png */; };
@@ -60,7 +59,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		51CF6D49165AE0DB00FCADA8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		51CF6D4A165AE0DB00FCADA8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		51CF6D4B165AE0DB00FCADA8 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		51CF6D4C165AE0DB00FCADA8 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
@@ -169,7 +167,6 @@
 			children = (
 				51CF6D54165AE0DB00FCADA8 /* iTunesArtwork */,
 				51CF6D55165AE0DB00FCADA8 /* iTunesArtwork@2x */,
-				51CF6D49165AE0DB00FCADA8 /* Default-568h@2x.png */,
 				51CF6D4A165AE0DB00FCADA8 /* Default.png */,
 				51CF6D4B165AE0DB00FCADA8 /* Default@2x.png */,
 				51CF6D4C165AE0DB00FCADA8 /* Icon-72.png */,
@@ -379,7 +376,6 @@
 			files = (
 				585688B7160131D600AD5C9D /* InfoPlist.strings in Resources */,
 				585688C0160131D600AD5C9D /* MainStoryboard.storyboard in Resources */,
-				51CF6D68165AE0DB00FCADA8 /* Default-568h@2x.png in Resources */,
 				51CF6D69165AE0DB00FCADA8 /* Default.png in Resources */,
 				51CF6D6A165AE0DB00FCADA8 /* Default@2x.png in Resources */,
 				51CF6D6B165AE0DB00FCADA8 /* Icon-72.png in Resources */,
