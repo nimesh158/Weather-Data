@@ -102,7 +102,7 @@ NSInteger const kWeatherAPIClientErrorCodeNoAPIKey = 1001;
               // Check the responseObject
               if (!responseObject || ![responseObject isKindOfClass:[NSDictionary class]] || [responseObject count] == 0) {
                   DLog(@"Invalid responseObject: %@", responseObject);
-                  completionBlock(NO, nil, [self genericError]);
+                  completionBlock(NO, nil, [weakSelf genericError]);
                   return;
               }
               

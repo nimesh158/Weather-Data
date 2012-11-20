@@ -10,6 +10,7 @@
 #import "WeatherAPIClient.h"
 #import "UMBAppDelegate.h"
 #import "UMBHourlyCell.h"
+#import "UMBImageDownloader.h"
 
 @interface UMBMainViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UILabel* cityName;
@@ -20,14 +21,16 @@
 @property (strong, nonatomic) IBOutlet UILabel* windSpeed;
 @property (strong, nonatomic) IBOutlet UITableView* hourly;
 @property (strong, nonatomic) NSArray* hourlyData;
+@property (strong, nonatomic) NSMutableDictionary* icons;
 @property (assign, nonatomic) BOOL isWeatherDataLoaded;
 
 - (void) updateViewForWeatherData:(NSDictionary *)weatherData;
 - (void) updateCurrentConditionsForData:(NSDictionary *)current;
+- (void) retriveIcon:(NSString *)iconLink forIndexPath:(NSIndexPath *) indexPath;
 @end
 
 @implementation UMBMainViewController
-@synthesize cityName = _cityName, temperature = _temperature, weatherText = _weatherText, precipitation = _precipitation, humidity = _humidity, windSpeed = _windSpeed, hourly = _hourly, hourlyData = _hourlyData, isWeatherDataLoaded = _isWeatherDataLoaded;
+@synthesize cityName = _cityName, temperature = _temperature, weatherText = _weatherText, precipitation = _precipitation, humidity = _humidity, windSpeed = _windSpeed, hourly = _hourly, hourlyData = _hourlyData, icons = _icons, isWeatherDataLoaded = _isWeatherDataLoaded;
 
 - (void)viewDidLoad
 {
@@ -35,6 +38,12 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     self.isWeatherDataLoaded = NO;
+    
+    self.icons = [[NSMutableDictionary alloc] init];
+    
+    //Set the font size between 17-41 and have it adjust automatically
+    self.weatherText.minimumFontSize = 17.0f;
+    self.weatherText.adjustsFontSizeToFitWidth = YES;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -89,7 +98,7 @@
     } else {
         //set current conditions data
         [self updateCurrentConditionsForData:[weatherData objectForKey:@"current_observation"]];
-//        DLog(@"Hourly Conditions = %@", [weatherData objectForKey:@"hourly_forecast"]);
+        DLog(@"Hourly Conditions = %@", [weatherData objectForKey:@"hourly_forecast"]);
         //set hourly data
         self.hourlyData = [weatherData objectForKey:@"hourly_forecast"];
         [self.hourly reloadData];
@@ -97,7 +106,7 @@
 }
 
 - (void) updateCurrentConditionsForData:(NSDictionary *)current {
-    DLog(@"Current Conditions = %@", current);
+//    DLog(@"Current Conditions = %@", current);
     
     //city name
     NSDictionary* display_location = [current objectForKey:@"display_location"];
@@ -247,6 +256,15 @@
         UIColor* color = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dashed_line_pattern"]];
         [cell.seperator setBackgroundColor:color];
         
+        // Set the icon
+        if(![self.icons objectForKey:indexPath]) {
+            [cell.icon setImage:nil];
+            //Retrive the icon, save it and display it
+            [self retriveIcon:[hour objectForKey:@"icon_url"] forIndexPath:indexPath];
+        } else {
+            [cell.icon setImage:[self.icons objectForKey:indexPath]];
+        }
+        
         return cell;
     } else {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:loadingCell];
@@ -283,6 +301,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - Retrive Icon for Index path
+- (void) retriveIcon:(NSString *)iconLink forIndexPath:(NSIndexPath *)indexPath {
+    UMBImageDownloader* downloader = [[UMBImageDownloader alloc] init];
+    [downloader downloadIcon:iconLink withCompletionBlock:^(BOOL success, UIImage* result, NSError* error) {
+        if(success) {
+            [self.icons setObject:result forKey:indexPath];
+            [self.hourly reloadData];
+        }
+    }];
 }
 
 #pragma mark - Flipside View

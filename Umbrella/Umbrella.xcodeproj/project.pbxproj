@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51B83C93165C07D200E2602B /* UMBImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B83C92165C07D200E2602B /* UMBImageDownloader.m */; };
 		51CF6D69165AE0DB00FCADA8 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 51CF6D4A165AE0DB00FCADA8 /* Default.png */; };
 		51CF6D6A165AE0DB00FCADA8 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51CF6D4B165AE0DB00FCADA8 /* Default@2x.png */; };
 		51CF6D6B165AE0DB00FCADA8 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 51CF6D4C165AE0DB00FCADA8 /* Icon-72.png */; };
@@ -59,6 +60,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		51B83C91165C07D200E2602B /* UMBImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMBImageDownloader.h; sourceTree = "<group>"; };
+		51B83C92165C07D200E2602B /* UMBImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMBImageDownloader.m; sourceTree = "<group>"; };
 		51CF6D4A165AE0DB00FCADA8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		51CF6D4B165AE0DB00FCADA8 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		51CF6D4C165AE0DB00FCADA8 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
@@ -271,6 +274,8 @@
 				588A8A511603C089002350AF /* UMBMainViewController.m */,
 				51CF6D85165AE96C00FCADA8 /* UMBHourlyCell.h */,
 				51CF6D86165AE96C00FCADA8 /* UMBHourlyCell.m */,
+				51B83C91165C07D200E2602B /* UMBImageDownloader.h */,
+				51B83C92165C07D200E2602B /* UMBImageDownloader.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -430,6 +435,7 @@
 				588A8A7C1603C4D8002350AF /* AFXMLRequestOperation.m in Sources */,
 				588A8A7D1603C4D8002350AF /* UIImageView+AFNetworking.m in Sources */,
 				51CF6D87165AE96C00FCADA8 /* UMBHourlyCell.m in Sources */,
+				51B83C93165C07D200E2602B /* UMBImageDownloader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
